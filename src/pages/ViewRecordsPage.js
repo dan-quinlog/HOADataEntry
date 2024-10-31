@@ -12,13 +12,11 @@ const ViewRecordsPage = () => {
   const navigate = useNavigate();
 
   const { data, loading, error } = useQuery(LIST_OWNERS);
-  console.log('LIST_OWNERS data:', data);
 
   const { data: ownerDetails } = useQuery(GET_OWNER_DETAILS, {
     variables: { id: expandedOwner },
     skip: !expandedOwner,
   });
-  console.log('Owner Details:', ownerDetails);
 
   const [deleteOwnerMutation] = useMutation(DELETE_OWNER);
   const [deleteUnitMutation] = useMutation(DELETE_UNIT);

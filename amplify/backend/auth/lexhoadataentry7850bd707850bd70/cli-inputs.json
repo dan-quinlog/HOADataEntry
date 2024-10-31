@@ -63,11 +63,11 @@
     },
     "breakCircularDependency": true,
     "dependsOn": [],
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"email\",\"openid\"],\"CallbackURLs\":[\"http://localhost:3000/\",\"http://localhost:3000/\"],\"LogoutURLs\":[\"http://localhost:3000/\"]}",
     "authProviders": [],
     "parentStack": {
       "Ref": "AWS::StackId"
     },
-    "permissions": []
+    "permissions": [],
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"email\",\"openid\"],\"CallbackURLs\":[\"https://main.dnyrynn2rm9if.amplifyapp.com/\",\"https://main.dnyrynn2rm9if.amplifyapp.com/\",\"https://main.dnyrynn2rm9if.amplifyapp.com/\"],\"LogoutURLs\":[\"https://main.dnyrynn2rm9if.amplifyapp.com/\"]}"
   }
 }

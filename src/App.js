@@ -47,10 +47,8 @@ function App() {
         if (currentUser) {
           setUser(currentUser);
           const session = await fetchAuthSession();
-          console.log('Session active:', session);
         }
       } catch (error) {
-        console.log('No active session');
         setUser(null);
       }
     };
