@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-lexhoadataentry-dev-0d8a1-authRole",
+      "UnauthRoleArn": "arn:aws:iam::324037289979:role/amplify-lexhoadataentry-dev-0d8a1-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::324037289979:role/amplify-lexhoadataentry-dev-0d8a1-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-lexhoadataentry-dev-0d8a1-deployment",
+      "UnauthRoleName": "amplify-lexhoadataentry-dev-0d8a1-unauthRole",
+      "StackName": "amplify-lexhoadataentry-dev-0d8a1",
+      "StackId": "arn:aws:cloudformation:us-east-1:324037289979:stack/amplify-lexhoadataentry-dev-0d8a1/11b9dcb0-958f-11ef-b9c3-0afff2f47e4f",
+      "AmplifyAppId": "dnyrynn2rm9if"
+    },
+    "categories": {
+      "auth": {
+        "lexhoadataentry7850bd707850bd70": {}
+      },
+      "api": {
+        "lexhoadataentry": {}
+      }
+    }
+  }
+}

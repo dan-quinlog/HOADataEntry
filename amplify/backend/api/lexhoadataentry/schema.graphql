@@ -1,0 +1,54 @@
+type Owner @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  name: String!
+  address1: String!
+  address2: String
+  city: String!
+  state: String!
+  zip: String!
+  email: String!
+  phone: String!
+  units: [Unit] @hasMany
+  payments: [Payment] @hasMany
+}
+
+type Unit @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  unitNumber: String!
+  owner: Owner! @belongsTo
+}
+
+type Payment @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  checkDate: AWSDate!
+  checkNumber: String!
+  checkAmount: Float!
+  invoiceNumber: String!
+  invoiceAmount: Float!
+  owner: Owner! @belongsTo
+}
+
+input CreateOwnerInput {
+  name: String!
+  address1: String!
+  address2: String
+  city: String!
+  state: String!
+  zip: String!
+  email: String!
+  phone: String!
+  units: [CreateUnitInput]
+  payments: [CreatePaymentInput]
+}
+
+input CreateUnitInput {
+  unitNumber: String!
+}
+
+input CreatePaymentInput {
+  checkDate: String!
+  checkNumber: String!
+  checkAmount: String!
+  invoiceNumber: String!
+  invoiceAmount: String!
+}
