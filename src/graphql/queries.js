@@ -55,6 +55,22 @@ export const LIST_OWNERS = gql`
         zip
         email
         phone
+        units {
+          items {
+            id
+            unitNumber
+          }
+        }
+        payments {
+          items {
+            id
+            checkDate
+            checkNumber
+            checkAmount
+            invoiceNumber
+            invoiceAmount
+          }
+        }
         createdAt
         updatedAt
         __typename
