@@ -13,10 +13,22 @@ export const GET_OWNER_DETAILS = gql`
       email
       phone
       units {
+        items {
+          id
+          unitNumber
+        }
         nextToken
         __typename
       }
       payments {
+        items {
+          id
+          checkDate
+          checkNumber
+          checkAmount
+          invoiceNumber
+          invoiceAmount
+        }
         nextToken
         __typename
       }
