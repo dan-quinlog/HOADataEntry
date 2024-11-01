@@ -31,27 +31,26 @@ const OwnerCard = ({ owner, setOwner, locked, setLocked }) => {
     { name: 'city', label: 'City', required: true },
     { name: 'state', label: 'State', required: true },
     { name: 'zip', label: 'ZIP', required: true },
-    { 
-      name: 'email', 
+    {
+      name: 'email',
       label: 'Email',
-      required: true,
+      required: false,
       validate: validateEmail,
       onChange: handleEmailChange,
-      className: (value) => validateEmail(value) ? 'border-gray-300' : 'border-red-500',
-      labelClassName: (value) => validateEmail(value) ? 'text-gray-700' : 'text-red-500'
+      className: (value) => !value || validateEmail(value) ? 'border-gray-300' : 'border-red-500',
+      labelClassName: (value) => !value || validateEmail(value) ? 'text-gray-700' : 'text-red-500'
     },
-    { 
-      name: 'phone', 
-      label: 'Phone', 
-      required: true,
+    {
+      name: 'phone',
+      label: 'Phone',
+      required: false,
       onChange: handlePhoneChange,
       maxLength: 12,
-      validate: (value) => value.replace(/\D/g, '').length === 10,
-      className: (value) => value.replace(/\D/g, '').length === 10 ? 'border-gray-300' : 'border-red-500',
-      labelClassName: (value) => value.replace(/\D/g, '').length === 10 ? 'text-gray-700' : 'text-red-500'
+      validate: (value) => !value || value.replace(/\D/g, '').length === 10,
+      className: (value) => !value || value.replace(/\D/g, '').length === 10 ? 'border-gray-300' : 'border-red-500',
+      labelClassName: (value) => !value || value.replace(/\D/g, '').length === 10 ? 'text-gray-700' : 'text-red-500'
     }
   ];
-
   useEffect(() => {
     if (!locked) {
       nameRef.current?.focus();
@@ -68,8 +67,8 @@ const OwnerCard = ({ owner, setOwner, locked, setLocked }) => {
 
   const validateRequiredFields = () => {
     if (!validateOwner()) return false;
-    if (!validateEmail(owner.email)) return false;
-    if (owner.phone.replace(/\D/g, '').length !== 10) return false;
+    if (owner.email && !validateEmail(owner.email)) return false;
+    if (owner.phone && owner.phone.replace(/\D/g, '').length !== 10) return false;
     return true;
   };
   const attemptLock = () => {
