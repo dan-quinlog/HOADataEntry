@@ -6,8 +6,8 @@ type Owner @model @auth(rules: [{allow: private}]) {
   city: String!
   state: String!
   zip: String!
-  email: String!
-  phone: String!
+  email: String
+  phone: String
   units: [Unit] @hasMany
   payments: [Payment] @hasMany
 }

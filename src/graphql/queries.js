@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-export const GET_OWNER = gql`
+export const GET_OWNER_DETAILS = gql`
   query GetOwner($id: ID!) {
     getOwner(id: $id) {
       id
@@ -26,7 +26,6 @@ export const GET_OWNER = gql`
     }
   }
 `;
-
 export const LIST_OWNERS = gql`
   query ListOwners(
     $filter: ModelOwnerFilterInput
@@ -44,22 +43,6 @@ export const LIST_OWNERS = gql`
         zip
         email
         phone
-        units {
-          items {
-            id
-            unitNumber
-          }
-        }
-        payments {
-          items {
-            id
-            checkDate
-            checkNumber
-            checkAmount
-            invoiceNumber
-            invoiceAmount
-          }
-        }
         createdAt
         updatedAt
         __typename
@@ -69,8 +52,7 @@ export const LIST_OWNERS = gql`
     }
   }
 `;
-
-export const GET_OWNER_DETAILS = gql`
+export const GET_UNIT = gql`
   query GetUnit($id: ID!) {
     getUnit(id: $id) {
       id

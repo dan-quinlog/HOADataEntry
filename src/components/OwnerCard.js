@@ -58,16 +58,20 @@ const OwnerCard = ({ owner, setOwner, locked, setLocked }) => {
     }
   }, [locked]);
 
-  const validateRequiredFields = () => {
-    const requiredFields = fields.filter(field => field.required);
-    return requiredFields.every(field => {
-      if (field.name === 'email') {
-        return validateEmail(owner[field.name]);
-      }
-      return owner[field.name].trim() !== '';
-    });
+  const requiredFields = ['name', 'address1', 'city', 'state', 'zip'];
+
+  const validateOwner = () => {
+    return requiredFields.every(field => 
+      owner[field] && owner[field].trim() !== ''
+    );
   };
 
+  const validateRequiredFields = () => {
+    if (!validateOwner()) return false;
+    if (!validateEmail(owner.email)) return false;
+    if (owner.phone.replace(/\D/g, '').length !== 10) return false;
+    return true;
+  };
   const attemptLock = () => {
     if (locked) {
       setLocked(false);

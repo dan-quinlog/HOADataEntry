@@ -80,66 +80,64 @@ const DataEntryPage = () => {
         return !isNaN(date) && year >= 1900 && year <= 2100;
       });
     };
+      const handleSubmit = async () => {
+        if (!validateDates()) {
+          alert('Please enter valid dates (between years 1900-2100)');
+          return;
+        }
 
-    const handleSubmit = async () => {
-      if (!validateDates()) {
-        alert('Please enter valid dates (between years 1900-2100)');
-        return;
-      }
-
-      try {
-        // First create the owner
-        const ownerResult = await createOwner({
-          variables: {
-            input: {
-              name: owner.name,
-              address1: owner.address1,
-              address2: owner.address2,
-              city: owner.city,
-              state: owner.state,
-              zip: owner.zip,
-              email: owner.email,
-              phone: owner.phone
-            }
-          }
-        });
-
-        const ownerId = ownerResult.data.createOwner.id;
-
-        // Create units with owner relationship
-        const unitPromises = units.map(unit => 
-          createUnit({
+        try {
+          const ownerResult = await createOwner({
             variables: {
               input: {
-                unitNumber: unit.unitNumber,
-                ownerUnitsId: ownerId
+                name: owner.name,
+                address1: owner.address1,
+                address2: owner.address2,
+                city: owner.city,
+                state: owner.state,
+                zip: owner.zip,
+                email: owner.email || null,
+                phone: owner.phone || null
               }
             }
-          })
-        );
+          });
 
-        // Create payments with owner relationship
-        const paymentPromises = payments.map(payment =>
-          createPayment({
-            variables: {
-              input: {
-                checkDate: payment.checkDate,
-                checkNumber: payment.checkNumber,
-                checkAmount: payment.checkAmount,
-                invoiceNumber: payment.invoiceNumber,
-                invoiceAmount: payment.invoiceAmount,
-                ownerPaymentsId: ownerId
+          const ownerId = ownerResult.data.createOwner.id;
+
+          // Create units with owner relationship
+          const unitPromises = units.map(unit => 
+            createUnit({
+              variables: {
+                input: {
+                  unitNumber: unit.unitNumber,
+                  ownerUnitsId: ownerId
+                }
               }
-            }
-          })
-        );
+            })
+          );
 
-        await Promise.all([...unitPromises, ...paymentPromises]);
-        alert('Record created successfully!');
-        clearRecord();
-      } catch (error) {
-        alert(`Error: ${error.message}`);
-      }
+          // Create payments with owner relationship
+          const paymentPromises = payments.map(payment =>
+            createPayment({
+              variables: {
+                input: {
+                  checkDate: payment.checkDate,
+                  checkNumber: payment.checkNumber,
+                  checkAmount: payment.checkAmount,
+                  invoiceNumber: payment.invoiceNumber,
+                  invoiceAmount: payment.invoiceAmount,
+                  ownerPaymentsId: ownerId
+                }
+              }
+            })
+          );
+
+          await Promise.all([...unitPromises, ...paymentPromises]);
+          alert('Record created successfully!');
+          clearRecord();
+        } catch (error) {
+          alert(`Error: ${error.message}`);
+        }
   };  return (
     <div className="container mx-auto p-4 max-w-4xl">
       <button
