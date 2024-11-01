@@ -106,17 +106,17 @@ const ViewRecordsPage = () => {
               </button>
             </div>
           </div>
-            {expandedOwner === owner.id && (
+            {expandedOwner === owner.id && ownerDetails?.getOwner && (
               <div className="mt-4">
                 <h3 className="font-bold mt-2">Units:</h3>
-                {owner.units?.items?.map(unit => (
+                {ownerDetails.getOwner.units?.items?.map(unit => (
                   <div key={unit.id} className="ml-4 p-2 bg-gray-100 rounded mt-1">
                     Unit Number: {unit.unitNumber}
                   </div>
                 ))}
 
                 <h3 className="font-bold mt-4">Payments:</h3>
-                {owner.payments?.items?.map(payment => (
+                {ownerDetails.getOwner.payments?.items?.map(payment => (
                   <div key={payment.id} className="ml-4 p-2 bg-gray-100 rounded mt-1">
                     <p>Check #{payment.checkNumber} - ${payment.checkAmount}</p>
                     <p>Date: {payment.checkDate}</p>

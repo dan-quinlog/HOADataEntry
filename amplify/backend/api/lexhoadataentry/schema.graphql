@@ -35,8 +35,8 @@ input CreateOwnerInput {
   city: String!
   state: String!
   zip: String!
-  email: String!
-  phone: String!
+  email: String
+  phone: String
   units: [CreateUnitInput]
   payments: [CreatePaymentInput]
 }
