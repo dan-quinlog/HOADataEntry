@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
-import { LIST_OWNERS, GET_OWNER_DETAILS } from '../graphql/queries';
-import { DELETE_OWNER, DELETE_UNIT, DELETE_PAYMENT } from '../graphql/mutations';
+import { LIST_OWNERS_SORTED, GET_OWNER_DETAILS } from '../api/queries';
+import { DELETE_OWNER, DELETE_UNIT, DELETE_PAYMENT } from '../api/mutations';
 
 const ViewRecordsPage = () => {
   const [expandedOwner, setExpandedOwner] = useState(null);
@@ -11,7 +11,13 @@ const ViewRecordsPage = () => {
   const [selectedOwner, setSelectedOwner] = useState(null);
   const navigate = useNavigate();
 
-  const { data, loading, error } = useQuery(LIST_OWNERS);
+  const { data, loading, error } = useQuery(LIST_OWNERS_SORTED, {
+    variables: { 
+      type: "Owner",
+      sortDirection: "ASC",
+      limit: 1000
+    }
+  });
 
   const { data: ownerDetails } = useQuery(GET_OWNER_DETAILS, {
     variables: { id: expandedOwner },
@@ -46,7 +52,7 @@ const ViewRecordsPage = () => {
       // Delete the owner
       await deleteOwnerMutation({
         variables: { input: { id: selectedOwner.id } },
-        refetchQueries: [{ query: LIST_OWNERS }]
+        refetchQueries: [{ query: LIST_OWNERS_SORTED }]
       });
 
       if (isResubmit) {
@@ -76,9 +82,11 @@ const ViewRecordsPage = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
+  const owners = data?.ownersByName?.items || [];
+
   return (
     <div className="container mx-auto p-4">
-      {data?.listOwners.items.map(owner => (
+      {data?.ownersByName.items.map(owner => (
         <div key={owner.id} className="bg-white rounded shadow mb-4 p-4">
           <div className="flex justify-between items-center">
             <div>
@@ -97,7 +105,7 @@ const ViewRecordsPage = () => {
               </button>
               <button
                 onClick={() => {
-                  setSelectedOwner(owner);
+                  setSelectedOwner(ownerDetails?.getOwner);
                   setShowConfirmDialog(true);
                 }}
                 className="p-2 bg-red-500 text-white rounded"
@@ -106,26 +114,26 @@ const ViewRecordsPage = () => {
               </button>
             </div>
           </div>
-            {expandedOwner === owner.id && ownerDetails?.getOwner && (
-              <div className="mt-4">
-                <h3 className="font-bold mt-2">Units:</h3>
-                {ownerDetails.getOwner.units?.items?.map(unit => (
-                  <div key={unit.id} className="ml-4 p-2 bg-gray-100 rounded mt-1">
-                    Unit Number: {unit.unitNumber}
-                  </div>
-                ))}
+          {expandedOwner === owner.id && ownerDetails?.getOwner && (
+            <div className="mt-4">
+              <h3 className="font-bold mt-2">Units:</h3>
+              {ownerDetails.getOwner.units?.items?.map(unit => (
+                <div key={unit.id} className="ml-4 p-2 bg-gray-100 rounded mt-1">
+                  Unit Number: {unit.unitNumber}
+                </div>
+              ))}
 
-                <h3 className="font-bold mt-4">Payments:</h3>
-                {ownerDetails.getOwner.payments?.items?.map(payment => (
-                  <div key={payment.id} className="ml-4 p-2 bg-gray-100 rounded mt-1">
-                    <p>Check #{payment.checkNumber} - ${payment.checkAmount}</p>
-                    <p>Date: {payment.checkDate}</p>
-                    <p>Invoice #{payment.invoiceNumber} - ${payment.invoiceAmount}</p>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+              <h3 className="font-bold mt-4">Payments:</h3>
+              {ownerDetails.getOwner.payments?.items?.map(payment => (
+                <div key={payment.id} className="ml-4 p-2 bg-gray-100 rounded mt-1">
+                  <p>Check #{payment.checkNumber} - ${payment.checkAmount}</p>
+                  <p>Date: {payment.checkDate}</p>
+                  <p>Invoice #{payment.invoiceNumber} - ${payment.invoiceAmount}</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       ))}
 
       {showConfirmDialog && (
@@ -172,3 +180,4 @@ const ViewRecordsPage = () => {
 };
 
 export default ViewRecordsPage;
+

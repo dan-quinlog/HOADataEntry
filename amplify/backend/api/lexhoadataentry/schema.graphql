@@ -1,5 +1,6 @@
 type Owner @model @auth(rules: [{allow: private}]) {
   id: ID!
+  type: String @default(value: "Owner") @index(name: "ownersByName", queryField: "ownersByName", sortKeyFields: ["name"])
   name: String!
   address1: String!
   address2: String
@@ -9,7 +10,7 @@ type Owner @model @auth(rules: [{allow: private}]) {
   email: String
   phone: String
   units: [Unit] @hasMany
-  payments: [Payment] @hasMany
+  payments: [Payment] @hasMany(indexName: "byOwner", fields: ["id"])
 }
 
 type Unit @model @auth(rules: [{allow: private}]) {
@@ -20,12 +21,14 @@ type Unit @model @auth(rules: [{allow: private}]) {
 
 type Payment @model @auth(rules: [{allow: private}]) {
   id: ID!
+  type: String @default(value: "Payment") @index(name: "paymentsByDate", queryField: "paymentsByDate", sortKeyFields: ["checkDate"])
   checkDate: AWSDate!
   checkNumber: String!
   checkAmount: Float!
   invoiceNumber: String!
   invoiceAmount: Float!
-  owner: Owner! @belongsTo
+  owner: Owner! @belongsTo(fields: ["ownerPaymentsId"])
+  ownerPaymentsId: ID! @index(name: "byOwner", sortKeyFields: ["checkDate"])
 }
 
 input CreateOwnerInput {
@@ -51,4 +54,5 @@ input CreatePaymentInput {
   checkAmount: String!
   invoiceNumber: String!
   invoiceAmount: String!
+  ownerPaymentsId: ID!
 }

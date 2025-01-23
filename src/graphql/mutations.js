@@ -1,12 +1,14 @@
-import { gql } from '@apollo/client';
+/* eslint-disable */
+// this is an auto generated file. This will be overwritten
 
-export const CREATE_OWNER = gql`
+export const createOwner = /* GraphQL */ `
   mutation CreateOwner(
     $input: CreateOwnerInput!
     $condition: ModelOwnerConditionInput
   ) {
     createOwner(input: $input, condition: $condition) {
       id
+      type
       name
       address1
       address2
@@ -29,13 +31,14 @@ export const CREATE_OWNER = gql`
     }
   }
 `;
-export const UPDATE_OWNER = gql`
+export const updateOwner = /* GraphQL */ `
   mutation UpdateOwner(
     $input: UpdateOwnerInput!
     $condition: ModelOwnerConditionInput
   ) {
     updateOwner(input: $input, condition: $condition) {
       id
+      type
       name
       address1
       address2
@@ -58,13 +61,14 @@ export const UPDATE_OWNER = gql`
     }
   }
 `;
-export const DELETE_OWNER = gql`
+export const deleteOwner = /* GraphQL */ `
   mutation DeleteOwner(
     $input: DeleteOwnerInput!
     $condition: ModelOwnerConditionInput
   ) {
     deleteOwner(input: $input, condition: $condition) {
       id
+      type
       name
       address1
       address2
@@ -87,7 +91,7 @@ export const DELETE_OWNER = gql`
     }
   }
 `;
-export const CREATE_UNIT = gql`
+export const createUnit = /* GraphQL */ `
   mutation CreateUnit(
     $input: CreateUnitInput!
     $condition: ModelUnitConditionInput
@@ -97,6 +101,7 @@ export const CREATE_UNIT = gql`
       unitNumber
       owner {
         id
+        type
         name
         address1
         address2
@@ -116,7 +121,7 @@ export const CREATE_UNIT = gql`
     }
   }
 `;
-export const UPDATE_UNIT = gql`
+export const updateUnit = /* GraphQL */ `
   mutation UpdateUnit(
     $input: UpdateUnitInput!
     $condition: ModelUnitConditionInput
@@ -126,6 +131,7 @@ export const UPDATE_UNIT = gql`
       unitNumber
       owner {
         id
+        type
         name
         address1
         address2
@@ -145,7 +151,7 @@ export const UPDATE_UNIT = gql`
     }
   }
 `;
-export const DELETE_UNIT = gql`
+export const deleteUnit = /* GraphQL */ `
   mutation DeleteUnit(
     $input: DeleteUnitInput!
     $condition: ModelUnitConditionInput
@@ -155,6 +161,7 @@ export const DELETE_UNIT = gql`
       unitNumber
       owner {
         id
+        type
         name
         address1
         address2
@@ -174,13 +181,14 @@ export const DELETE_UNIT = gql`
     }
   }
 `;
-export const CREATE_PAYMENT = gql`
+export const createPayment = /* GraphQL */ `
   mutation CreatePayment(
     $input: CreatePaymentInput!
     $condition: ModelPaymentConditionInput
   ) {
     createPayment(input: $input, condition: $condition) {
       id
+      type
       checkDate
       checkNumber
       checkAmount
@@ -188,6 +196,7 @@ export const CREATE_PAYMENT = gql`
       invoiceAmount
       owner {
         id
+        type
         name
         address1
         address2
@@ -200,20 +209,21 @@ export const CREATE_PAYMENT = gql`
         updatedAt
         __typename
       }
+      ownerPaymentsId
       createdAt
       updatedAt
-      ownerPaymentsId
       __typename
     }
   }
 `;
-export const UPDATE_PAYMENT = gql`
+export const updatePayment = /* GraphQL */ `
   mutation UpdatePayment(
     $input: UpdatePaymentInput!
     $condition: ModelPaymentConditionInput
   ) {
     updatePayment(input: $input, condition: $condition) {
       id
+      type
       checkDate
       checkNumber
       checkAmount
@@ -221,6 +231,7 @@ export const UPDATE_PAYMENT = gql`
       invoiceAmount
       owner {
         id
+        type
         name
         address1
         address2
@@ -233,20 +244,21 @@ export const UPDATE_PAYMENT = gql`
         updatedAt
         __typename
       }
+      ownerPaymentsId
       createdAt
       updatedAt
-      ownerPaymentsId
       __typename
     }
   }
 `;
-export const DELETE_PAYMENT = gql`
+export const deletePayment = /* GraphQL */ `
   mutation DeletePayment(
     $input: DeletePaymentInput!
     $condition: ModelPaymentConditionInput
   ) {
     deletePayment(input: $input, condition: $condition) {
       id
+      type
       checkDate
       checkNumber
       checkAmount
@@ -254,6 +266,7 @@ export const DELETE_PAYMENT = gql`
       invoiceAmount
       owner {
         id
+        type
         name
         address1
         address2
@@ -266,9 +279,9 @@ export const DELETE_PAYMENT = gql`
         updatedAt
         __typename
       }
+      ownerPaymentsId
       createdAt
       updatedAt
-      ownerPaymentsId
       __typename
     }
   }

@@ -3,8 +3,7 @@ import { useLocation } from 'react-router-dom';import OwnerCard from '../compone
 import UnitCard from '../components/UnitCard';
 import PaymentCard from '../components/PaymentCard';
 import { useMutation } from '@apollo/client';
-import { CREATE_OWNER, CREATE_UNIT, CREATE_PAYMENT } from '../graphql/mutations';
-
+import { CREATE_OWNER, CREATE_UNIT, CREATE_PAYMENT } from '../api/mutations';
 
 const DataEntryPage = () => {
   const location = useLocation();

@@ -1,9 +1,11 @@
-import { gql } from '@apollo/client';
+/* eslint-disable */
+// this is an auto generated file. This will be overwritten
 
-export const GET_OWNER_DETAILS = gql`
+export const getOwner = /* GraphQL */ `
   query GetOwner($id: ID!) {
     getOwner(id: $id) {
       id
+      type
       name
       address1
       address2
@@ -13,22 +15,10 @@ export const GET_OWNER_DETAILS = gql`
       email
       phone
       units {
-        items {
-          id
-          unitNumber
-        }
         nextToken
         __typename
       }
       payments {
-        items {
-          id
-          checkDate
-          checkNumber
-          checkAmount
-          invoiceNumber
-          invoiceAmount
-        }
         nextToken
         __typename
       }
@@ -38,7 +28,7 @@ export const GET_OWNER_DETAILS = gql`
     }
   }
 `;
-export const LIST_OWNERS = gql`
+export const listOwners = /* GraphQL */ `
   query ListOwners(
     $filter: ModelOwnerFilterInput
     $limit: Int
@@ -47,6 +37,7 @@ export const LIST_OWNERS = gql`
     listOwners(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        type
         name
         address1
         address2
@@ -55,22 +46,6 @@ export const LIST_OWNERS = gql`
         zip
         email
         phone
-        units {
-          items {
-            id
-            unitNumber
-          }
-        }
-        payments {
-          items {
-            id
-            checkDate
-            checkNumber
-            checkAmount
-            invoiceNumber
-            invoiceAmount
-          }
-        }
         createdAt
         updatedAt
         __typename
@@ -80,13 +55,14 @@ export const LIST_OWNERS = gql`
     }
   }
 `;
-export const GET_UNIT = gql`
+export const getUnit = /* GraphQL */ `
   query GetUnit($id: ID!) {
     getUnit(id: $id) {
       id
       unitNumber
       owner {
         id
+        type
         name
         address1
         address2
@@ -106,7 +82,7 @@ export const GET_UNIT = gql`
     }
   }
 `;
-export const LIST_UNITS = gql`
+export const listUnits = /* GraphQL */ `
   query ListUnits(
     $filter: ModelUnitFilterInput
     $limit: Int
@@ -126,10 +102,11 @@ export const LIST_UNITS = gql`
     }
   }
 `;
-export const GET_PAYMENT = gql`
+export const getPayment = /* GraphQL */ `
   query GetPayment($id: ID!) {
     getPayment(id: $id) {
       id
+      type
       checkDate
       checkNumber
       checkAmount
@@ -137,6 +114,7 @@ export const GET_PAYMENT = gql`
       invoiceAmount
       owner {
         id
+        type
         name
         address1
         address2
@@ -149,14 +127,14 @@ export const GET_PAYMENT = gql`
         updatedAt
         __typename
       }
+      ownerPaymentsId
       createdAt
       updatedAt
-      ownerPaymentsId
       __typename
     }
   }
 `;
-export const LIST_PAYMENTS = gql`
+export const listPayments = /* GraphQL */ `
   query ListPayments(
     $filter: ModelPaymentFilterInput
     $limit: Int
@@ -165,14 +143,122 @@ export const LIST_PAYMENTS = gql`
     listPayments(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        type
         checkDate
         checkNumber
         checkAmount
         invoiceNumber
         invoiceAmount
+        ownerPaymentsId
         createdAt
         updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const ownersByName = /* GraphQL */ `
+  query OwnersByName(
+    $type: String!
+    $name: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelOwnerFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    ownersByName(
+      type: $type
+      name: $name
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        type
+        name
+        address1
+        address2
+        city
+        state
+        zip
+        email
+        phone
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const paymentsByDate = /* GraphQL */ `
+  query PaymentsByDate(
+    $type: String!
+    $checkDate: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelPaymentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    paymentsByDate(
+      type: $type
+      checkDate: $checkDate
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        type
+        checkDate
+        checkNumber
+        checkAmount
+        invoiceNumber
+        invoiceAmount
         ownerPaymentsId
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const paymentsByOwnerPaymentsIdAndCheckDate = /* GraphQL */ `
+  query PaymentsByOwnerPaymentsIdAndCheckDate(
+    $ownerPaymentsId: ID!
+    $checkDate: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelPaymentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    paymentsByOwnerPaymentsIdAndCheckDate(
+      ownerPaymentsId: $ownerPaymentsId
+      checkDate: $checkDate
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        type
+        checkDate
+        checkNumber
+        checkAmount
+        invoiceNumber
+        invoiceAmount
+        ownerPaymentsId
+        createdAt
+        updatedAt
         __typename
       }
       nextToken

@@ -12,6 +12,7 @@ import Login from './components/Login';
 import Nav from './components/Nav';
 import awsmobile from './aws-exports';
 
+
 Amplify.configure(awsmobile);
 
 const url = awsmobile.aws_appsync_graphqlEndpoint;

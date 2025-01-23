@@ -9,6 +9,7 @@ function Nav() {
   return (
     <nav className="bg-white shadow-lg p-4 mb-6">
       <div className="container mx-auto flex justify-center space-x-6">
+
         <a
           href="/data-entry"
           className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
@@ -30,4 +31,6 @@ function Nav() {
       </div>
     </nav>
   );
-}export default Nav;
+} export default Nav;
+
+

@@ -5,6 +5,7 @@ export const onCreateOwner = /* GraphQL */ `
   subscription OnCreateOwner($filter: ModelSubscriptionOwnerFilterInput) {
     onCreateOwner(filter: $filter) {
       id
+      type
       name
       address1
       address2
@@ -31,6 +32,7 @@ export const onUpdateOwner = /* GraphQL */ `
   subscription OnUpdateOwner($filter: ModelSubscriptionOwnerFilterInput) {
     onUpdateOwner(filter: $filter) {
       id
+      type
       name
       address1
       address2
@@ -57,6 +59,7 @@ export const onDeleteOwner = /* GraphQL */ `
   subscription OnDeleteOwner($filter: ModelSubscriptionOwnerFilterInput) {
     onDeleteOwner(filter: $filter) {
       id
+      type
       name
       address1
       address2
@@ -86,6 +89,7 @@ export const onCreateUnit = /* GraphQL */ `
       unitNumber
       owner {
         id
+        type
         name
         address1
         address2
@@ -112,6 +116,7 @@ export const onUpdateUnit = /* GraphQL */ `
       unitNumber
       owner {
         id
+        type
         name
         address1
         address2
@@ -138,6 +143,7 @@ export const onDeleteUnit = /* GraphQL */ `
       unitNumber
       owner {
         id
+        type
         name
         address1
         address2
@@ -161,6 +167,7 @@ export const onCreatePayment = /* GraphQL */ `
   subscription OnCreatePayment($filter: ModelSubscriptionPaymentFilterInput) {
     onCreatePayment(filter: $filter) {
       id
+      type
       checkDate
       checkNumber
       checkAmount
@@ -168,6 +175,7 @@ export const onCreatePayment = /* GraphQL */ `
       invoiceAmount
       owner {
         id
+        type
         name
         address1
         address2
@@ -180,9 +188,9 @@ export const onCreatePayment = /* GraphQL */ `
         updatedAt
         __typename
       }
+      ownerPaymentsId
       createdAt
       updatedAt
-      ownerPaymentsId
       __typename
     }
   }
@@ -191,6 +199,7 @@ export const onUpdatePayment = /* GraphQL */ `
   subscription OnUpdatePayment($filter: ModelSubscriptionPaymentFilterInput) {
     onUpdatePayment(filter: $filter) {
       id
+      type
       checkDate
       checkNumber
       checkAmount
@@ -198,6 +207,7 @@ export const onUpdatePayment = /* GraphQL */ `
       invoiceAmount
       owner {
         id
+        type
         name
         address1
         address2
@@ -210,9 +220,9 @@ export const onUpdatePayment = /* GraphQL */ `
         updatedAt
         __typename
       }
+      ownerPaymentsId
       createdAt
       updatedAt
-      ownerPaymentsId
       __typename
     }
   }
@@ -221,6 +231,7 @@ export const onDeletePayment = /* GraphQL */ `
   subscription OnDeletePayment($filter: ModelSubscriptionPaymentFilterInput) {
     onDeletePayment(filter: $filter) {
       id
+      type
       checkDate
       checkNumber
       checkAmount
@@ -228,6 +239,7 @@ export const onDeletePayment = /* GraphQL */ `
       invoiceAmount
       owner {
         id
+        type
         name
         address1
         address2
@@ -240,9 +252,9 @@ export const onDeletePayment = /* GraphQL */ `
         updatedAt
         __typename
       }
+      ownerPaymentsId
       createdAt
       updatedAt
-      ownerPaymentsId
       __typename
     }
   }
